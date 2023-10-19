@@ -41,8 +41,10 @@ L = 4
 
 Реализация:
 ```prolog
-length([], 0).
-length([_|T], N) :- length(T, N1), N is N1 + 1.
+length([], 0).  
+length([_|T], N) :-  
+    length(T, N1),   
+    N is N1 + 1.
 
 ```
 
