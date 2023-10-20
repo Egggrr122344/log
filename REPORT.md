@@ -136,6 +136,47 @@ sum_list([X|T], Sum) :-
 Второе правило sum_list([X|T], Sum) :- sum_list(T, Sum1), Sum is X + Sum1. рекурсивно вызывает sum_list для остатка списка T, чтобы вычислить сумму оставшихся элементов. Затем сумма Sum1 увеличивается на значение головы списка X, чтобы получить общую сумму.
 
 
+`sum_elements(X,Y)` - Вычисляет сумму всех элементов в списке (предикат на основе стандартных предикатов).
+
+Примеры использования:
+```prolog
+?- sum_elements([1, 2, 3], Sum).
+Sum = 6
+
+?- sum_elements([4, 5, 6, 7], Sum).
+Sum = 22
+
+?- sum_elements([], Sum).
+Sum = 0
+
+?- sum_elements([10], Sum).
+Sum = 10
+
+
+
+
+```
+
+Реализация:
+```prolog
+sum_elements([], 0).
+sum_elements(List, Sum) :-
+    sublist(Sublist, List),
+    permute(Sublist, Permutation),
+    remove(_, Permutation, UniquePermutation),
+    member(Element, UniquePermutation),
+    sum_list(Element, Sum).
+
+
+
+
+```
+
+Первое правило sum_elements([], 0) указывает, что сумма элементов пустого списка равна 0. 
+Второе правило sum_elements(List, Sum) :- sublist(Sublist, List), permute(Sublist, Permutation), remove(_, Permutation, UniquePermutation), member(Element, UniquePermutation), sum_list(Element, Sum). использует предикаты sublist, permute, remove, member и sum_list для нахождения всех подсписков Sublist и их перестановок Permutation в исходном списке List.
+Затем удаляются повторяющиеся перестановки с помощью remove и выбирается элемент Element из уникальных перестановок. Наконец, суммируются элементы выбранного подсписка с помощью предиката sum_list, чтобы получить общую сумму.
+
+
 ## Задание 2: Реляционное представление данных
 
 Опишите, в чем преимущества и недостатки реляционного представления в целом, и конкретного представления, которое вы использовали.
