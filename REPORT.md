@@ -93,6 +93,7 @@ find_index(Element, List, Index) :-
 Этот предикат использует стандартные предикаты length, append и member для нахождения номера первого вхождения элемента в списке.
 
 Первое правило find_index(_, [], -1) указывает, что если список пуст, то индекс равен -1. 
+
 Второе правило find_index(Element, List, Index) :- length(Prefix, Index), append(Prefix, [Element|_], List). использует предикаты length и append для разделения списка на префикс Prefix длиной Index и оставшуюся часть списка, начинающуюся с элемента Element. Если такое разделение возможно, то элемент найден и его индекс равен Index.
 
 
@@ -173,7 +174,9 @@ sum_elements(List, Sum) :-
 ```
 
 Первое правило sum_elements([], 0) указывает, что сумма элементов пустого списка равна 0. 
+
 Второе правило sum_elements(List, Sum) :- sublist(Sublist, List), permute(Sublist, Permutation), remove(_, Permutation, UniquePermutation), member(Element, UniquePermutation), sum_list(Element, Sum). использует предикаты sublist, permute, remove, member и sum_list для нахождения всех подсписков Sublist и их перестановок Permutation в исходном списке List.
+
 Затем удаляются повторяющиеся перестановки с помощью remove и выбирается элемент Element из уникальных перестановок. Наконец, суммируются элементы выбранного подсписка с помощью предиката sum_list, чтобы получить общую сумму.
 
 
