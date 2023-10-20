@@ -25,6 +25,7 @@
 Примеры использования:
 ```prolog
 ?- find_index(2, [1, 2, 3, 4, 5], Index).
+`Output:`
 Index = 1
 
 ?- find_index(5, [1, 2, 3, 4, 5], Index).
